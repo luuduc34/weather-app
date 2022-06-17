@@ -36,7 +36,7 @@ function weatherDetails(value){
     const day1 = value.list[0].dt_txt;
     const day2 = value.list[8].dt_txt;
     const iconcode = value.list[0].weather[0].icon;
-    const iconurl = `http://openweathermap.org/img/wn/${iconcode}@4x.png`;
+    const iconurl = `http://openweathermap.org/img/wn/${iconcode}@2x.png`;
 
     var allDays= ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
     var d2 = new Date(value.list[8].dt * 1000); // to get the DateTime. 
