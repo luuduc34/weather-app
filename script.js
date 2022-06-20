@@ -3,7 +3,7 @@ const CLIENT_ID = 'KiROWCmL9ZKZnoWjHWJlIdCP5jLw2f_2ziSpzcUcqIY'; // For Unsplash
 
 const wrapper = document.querySelector(".wrapper");
 const inputField = wrapper.querySelector("input");
-
+let tempo = "Historique : ";
 // Call requestApi and requestApi_unsplash when put value in field and press "enter"
 inputField.addEventListener("keyup", e =>{
     if(e.key == "Enter" && inputField.value !=""){
@@ -13,8 +13,7 @@ inputField.addEventListener("keyup", e =>{
     }
 })
 
-function history(val){
-    let tempo = "Historique : ";
+function history(val){    
     tempo += " " + val + " -";
     let visited = tempo.substring(0, tempo.length - 1);
     wrapper.querySelector('.visited').innerHTML = visited;
