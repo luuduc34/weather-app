@@ -1,6 +1,7 @@
 # weather-app
 
-Make an app who will display the weather for the next 5 days.
+This is an app who will display today's weather (with a 24h temp forecast graph) and 4 days forecast.
+It's responsive, normaly...
 
 ## Link to the app
 
