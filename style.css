@@ -30,6 +30,11 @@ body{
     padding: 15px;
     text-align: center;
 }
+.wrapper .visited{
+    font-size: 12px;
+    margin: 0 10px 10px;
+    
+}
 .wrapper .input-block{
     display: flex;
     justify-content: center;

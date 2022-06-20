@@ -2,18 +2,23 @@ const API_KEY = '1a8f49efd80db8c189bb16e06cd70e63'; // For Openweather API
 const CLIENT_ID = 'KiROWCmL9ZKZnoWjHWJlIdCP5jLw2f_2ziSpzcUcqIY'; // For Unsplash API
 
 const wrapper = document.querySelector(".wrapper");
-const inputPart = wrapper.querySelector(".input-block");
-const infoTxt = inputPart.querySelector(".info-txt");
-const inputField = inputPart.querySelector("input");
-const imgicon = document.querySelector(".icon");
+const inputField = wrapper.querySelector("input");
 
 // Call requestApi and requestApi_unsplash when put value in field and press "enter"
 inputField.addEventListener("keyup", e =>{
     if(e.key == "Enter" && inputField.value !=""){
         requestApi(inputField.value);
         requestApi_unsplash(inputField.value);
+        history(inputField.value);       
     }
 })
+
+function history(val){
+    let tempo = "Historique : ";
+    tempo += " " + val + " -";
+    let visited = tempo.substring(0, tempo.length - 1);
+    wrapper.querySelector('.visited').innerHTML = visited;
+}
 
 function requestApi(value){ // return data from API call promise to weatheDetails function
    
@@ -39,7 +44,7 @@ function weatherDetails(value){ // Get elements from API
     wrapper.querySelector(".one .temp .numb").innerHTML = Math.round(value.main.temp);
     wrapper.querySelector(".one .min .numb").innerHTML = Math.round(value.main.temp_min);
     wrapper.querySelector(".one .max .numb").innerHTML = Math.round(value.main.temp_max);
-    imgicon.querySelector(".icon1").src = `http://openweathermap.org/img/wn/${value.weather[0].icon}@2x.png`;
+    wrapper.querySelector(".icon1").src = `http://openweathermap.org/img/wn/${value.weather[0].icon}@2x.png`;
     
     console.log(value);
     // return data from API call promise to weatheDetails2 function
