@@ -79,8 +79,14 @@ body{
     text-align: center;
     margin-top: 10px;
 }
+.minmax-top{
+    margin-bottom: 20px;
+}
 .minmax{
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 .minmax p{
     text-align: center;

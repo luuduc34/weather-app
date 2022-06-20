@@ -5,7 +5,7 @@ const wrapper = document.querySelector(".wrapper");
 const inputPart = wrapper.querySelector(".input-block");
 const infoTxt = inputPart.querySelector(".info-txt");
 const inputField = inputPart.querySelector("input");
-const minmax = document.querySelector(".minmax");
+const minmax = document.querySelector(".minmax-top");
 const imgicon = document.querySelector(".icon");
 
 inputField.addEventListener("keyup", e =>{
@@ -16,10 +16,15 @@ inputField.addEventListener("keyup", e =>{
 })
 
 function requestApi(value){
-    let api = `https://api.openweathermap.org/data/2.5/forecast?q=${value}&appid=${API_KEY}&units=metric&lang=fr`;
+    /* let api = `https://api.openweathermap.org/data/2.5/forecast?q=${value}&appid=${API_KEY}&units=metric&lang=fr`;
+    fetch(api)
+        .then(response => response.json())
+        .then(result => weatherDetails(result)); */
+    let api = `https://api.openweathermap.org/data/2.5/weather?q=${value}&exclude=minutely, hourly&appid=${API_KEY}&units=metric&lang=fr`;
     fetch(api)
         .then(response => response.json())
         .then(result => weatherDetails(result));
+       
 }
 
 function requestApi_unsplash(value){
@@ -30,8 +35,20 @@ function requestApi_unsplash(value){
 }
 
 function weatherDetails(value){
-    const city = value.city.name;
-    const {id, description, icon} = value.list[0].weather[0];
+    const {lat, lon} = value.coord;
+    const city = value.name;
+    const {id, description, icon} = value.weather[0];
+    const {temp, temp_min, temp_max} = value.main;
+    const iconcode = icon;
+    const iconurl = `http://openweathermap.org/img/wn/${iconcode}@2x.png`;
+
+    wrapper.querySelector(".location").innerHTML = "- "+city+" -";
+    wrapper.querySelector(".one .weather").innerHTML = description;
+    wrapper.querySelector(".one .temp .numb").innerHTML = Math.round(temp);
+    minmax.querySelector(".min .numb").innerHTML = Math.round(temp_min);
+    minmax.querySelector(".max .numb").innerHTML = Math.round(temp_max);
+    imgicon.querySelector(".icon1").src = iconurl;
+    /*const {id, description, icon} = value.list[0].weather[0];
     const {temp, temp_min, temp_max} = value.list[0].main;
     const day1 = value.list[0].dt_txt;
     const day2 = value.list[8].dt_txt;
@@ -83,9 +100,14 @@ function weatherDetails(value){
     wrapper.querySelector(".five .weather").innerHTML = value.list[32].weather[0].description;
     wrapper.querySelector(".five .temp .numb").innerHTML = value.list[32].main.temp;
     wrapper.querySelector(".five .min .numb").innerHTML = value.list[32].main.temp_min;
-    wrapper.querySelector(".five .max .numb").innerHTML = value.list[32].main.temp_max;
+    wrapper.querySelector(".five .max .numb").innerHTML = value.list[32].main.temp_max; */
 
     console.log(value);
+
+    let api2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=current,minutely,hourly&appid=${API_KEY}&units=metric&lang=fr`;
+    fetch(api2)
+        .then(response => response.json())
+        .then(result => weatherDetails2(result));
 
     }
 
@@ -95,4 +117,48 @@ function weatherDetails(value){
         document.body.style.backgroundSize = 'cover';
         
         console.log(value);
+    }
+    
+    
+    function weatherDetails2(value){
+        
+        //const iconcode = icon;
+        //const iconurl = `http://openweathermap.org/img/wn/${iconcode}@2x.png`;
+        
+        var allDays= ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        var d2 = new Date(value.daily[1].dt * 1000); // to get the DateTime. 
+        var dayName_two = allDays[d2.getDay()]; // It will give day index, and based on index we can get day name from the array.
+        var d3 = new Date(value.daily[2].dt * 1000);
+        var dayName_thre = allDays[d3.getDay()];
+        var d4 = new Date(value.daily[3].dt * 1000);
+        var dayName_four = allDays[d4.getDay()];
+        var d5 = new Date(value.daily[4].dt * 1000);
+        var dayName_five = allDays[d5.getDay()];
+        
+        wrapper.querySelector(".day-two").innerHTML =dayName_two;
+        document.querySelector(".icon2").src = `http://openweathermap.org/img/wn/${value.daily[1].weather[0].icon}.png`;
+        wrapper.querySelector(".two .weather").innerHTML = value.daily[1].weather[0].description;
+        wrapper.querySelector(".two .min .numb").innerHTML = Math.round(value.daily[1].temp.min);
+        wrapper.querySelector(".two .max .numb").innerHTML = Math.round(value.daily[1].temp.max);
+
+        wrapper.querySelector(".day-thre").innerHTML =dayName_thre;
+        document.querySelector(".icon3").src = `http://openweathermap.org/img/wn/${value.daily[2].weather[0].icon}.png`;
+        wrapper.querySelector(".thre .weather").innerHTML = value.daily[2].weather[0].description;
+        wrapper.querySelector(".thre .min .numb").innerHTML = Math.round(value.daily[2].temp.min);
+        wrapper.querySelector(".thre .max .numb").innerHTML = Math.round(value.daily[2].temp.max);
+        
+        wrapper.querySelector(".day-four").innerHTML =dayName_four;
+        document.querySelector(".icon4").src = `http://openweathermap.org/img/wn/${value.daily[3].weather[0].icon}.png`;
+        wrapper.querySelector(".four .weather").innerHTML = value.daily[3].weather[0].description;
+        wrapper.querySelector(".four .min .numb").innerHTML = Math.round(value.daily[3].temp.min);
+        wrapper.querySelector(".four .max .numb").innerHTML = Math.round(value.daily[3].temp.max);
+        
+        wrapper.querySelector(".day-five").innerHTML =dayName_five;
+        document.querySelector(".icon5").src = `http://openweathermap.org/img/wn/${value.daily[4].weather[0].icon}.png`;
+        wrapper.querySelector(".five .weather").innerHTML = value.daily[4].weather[0].description;
+        wrapper.querySelector(".five .min .numb").innerHTML = Math.round(value.daily[4].temp.min);
+        wrapper.querySelector(".five .max .numb").innerHTML = Math.round(value.daily[4].temp.max);
+
+        console.log(value);
+
     }
