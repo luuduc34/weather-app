@@ -1,10 +1,14 @@
 # weather-app
 
-Make an app who will display the weather for the next 5 days.
+This is an app who will display today's weather (with a 24h temp forecast graph) and 4 days forecast.
+
+It's responsive, normaly...
+
+![Screenshot of the app](./img/wp.jpg)
 
 ## Link to the app
 
- - [Weather-app](https://luuduc34.github.io/weather-app/)
+[Weather-app](https://luuduc34.github.io/weather-app/)
 
 ## Language used
 
