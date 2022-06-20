@@ -14,11 +14,21 @@ body{
 }
 .separator{
     display: none;
-    border-bottom: 2px solid rgb(61, 170, 248);
+    border-bottom: 2px solid #3daaf8;
     width: 50%;
 }
+.separator1{
+    border-top: 2px solid rgb(61, 170, 248);
+    width: 100%;
+    margin: 0 0 20px;
+}
+.separator2{
+    border-bottom: 2px solid rgb(61, 170, 248);
+    width: 100%;
+    margin: 20px 0 0;
+}
 .wrapper{
-    margin-top: 30px;
+    margin: 30px auto;
     width: auto;
     border-radius: 15px;
     background-color: rgba(255, 255, 255, 0.7);
@@ -63,7 +73,6 @@ body{
 .wrapper .weather-block{
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
 }
 .weather-block img{
     align-items: center;
@@ -111,6 +120,10 @@ body{
 }
 .day-two, .day-thre, .day-four, .day-five{
     font-size: 15px;
+}
+.forecast{
+    padding-top: 20px;
+    background-color: rgba(67, 170, 248, 0.3);
 }
 
 @media screen and (max-width: 767px) {
