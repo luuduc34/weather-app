@@ -4,7 +4,6 @@ const CLIENT_ID = 'KiROWCmL9ZKZnoWjHWJlIdCP5jLw2f_2ziSpzcUcqIY'; // For Unsplash
 const wrapper = document.querySelector(".wrapper");
 const inputField = wrapper.querySelector("input");
 let tempo = "Historique : ";
-
 const labels = [];
 
 apisCall('liege'); // Start with weather of Liege
@@ -42,7 +41,7 @@ function requestApi_unsplash(value){ // return data from API call promise to Uns
         .then(response => response.json())
         .then(result => UnsplashDetails(result));
 }
-function select_icon(value){
+/* function select_icon(value){
     switch(value){
         case '01d' : return "<i class='fa-solid fa-sun fa-2xl'></i>";
         break;
@@ -60,7 +59,7 @@ function select_icon(value){
         break;
     }
 }
-
+ */
 function weatherDetails(value){ // Get elements from API
     const {lat, lon} = value.coord;
 
